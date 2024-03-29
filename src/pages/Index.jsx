@@ -24,10 +24,6 @@ const Index = () => {
         assistant_id: agentId,
         input: message,
       }),
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
     });
 
     const data = await response.json();
