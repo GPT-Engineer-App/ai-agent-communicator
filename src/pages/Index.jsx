@@ -20,6 +20,7 @@ const Index = () => {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${apiKey}`,
+          "OpenAI-Beta": "assistants=v1",
         },
         body: JSON.stringify({
           assistant_id: agentId,
@@ -35,6 +36,7 @@ const Index = () => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
+        "OpenAI-Beta": "assistants=v1",
       },
       body: JSON.stringify({
         input: message,
@@ -46,6 +48,7 @@ const Index = () => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
+        "OpenAI-Beta": "assistants=v1",
       },
     });
 
