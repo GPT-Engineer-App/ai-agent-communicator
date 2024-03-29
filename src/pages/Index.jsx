@@ -4,6 +4,7 @@ import { FaPaperPlane } from "react-icons/fa";
 
 const Index = () => {
   const [agentId, setAgentId] = useState("");
+  const [apiKey, setApiKey] = useState("");
   const [message, setMessage] = useState("");
   const [conversation, setConversation] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -23,6 +24,10 @@ const Index = () => {
         assistant_id: agentId,
         input: message,
       }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
     });
 
     const data = await response.json();
@@ -40,6 +45,7 @@ const Index = () => {
       {!agentId && (
         <VStack spacing={4}>
           <Input placeholder="Enter your AI Agent ID" value={agentId} onChange={(e) => setAgentId(e.target.value)} bg="gray.800" />
+          <Input placeholder="Enter your OpenAI API Key" value={apiKey} onChange={(e) => setApiKey(e.target.value)} bg="gray.800" />
           <Button colorScheme="blue" onClick={() => setAgentId(agentId)}>
             Set Agent ID
           </Button>
