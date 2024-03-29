@@ -23,7 +23,7 @@ const Index = () => {
           "OpenAI-Beta": "assistants=v1",
         },
         body: JSON.stringify({
-          model: agentId,
+          assistant_id: agentId,
         }),
       });
 
