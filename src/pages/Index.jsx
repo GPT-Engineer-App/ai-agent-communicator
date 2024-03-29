@@ -32,14 +32,14 @@ const Index = () => {
   };
 
   return (
-    <Box maxWidth="600px" margin="auto" padding={4}>
+    <Box maxWidth="600px" margin="auto" padding={4} bg="gray.900" color="white">
       <Heading as="h1" size="xl" textAlign="center" marginBottom={8}>
         Personal AI Agent
       </Heading>
 
       {!agentId && (
         <VStack spacing={4}>
-          <Input placeholder="Enter your AI Agent ID" value={agentId} onChange={(e) => setAgentId(e.target.value)} />
+          <Input placeholder="Enter your AI Agent ID" value={agentId} onChange={(e) => setAgentId(e.target.value)} bg="gray.800" />
           <Button colorScheme="blue" onClick={() => setAgentId(agentId)}>
             Set Agent ID
           </Button>
@@ -50,7 +50,7 @@ const Index = () => {
         <>
           <VStack spacing={4} align="stretch">
             {conversation.map((msg, index) => (
-              <Box key={index} borderWidth={1} borderRadius="md" padding={4}>
+              <Box key={index} borderWidth={1} borderRadius="md" padding={4} bg="gray.800">
                 <Text fontWeight="bold">User:</Text>
                 <Text>{msg.user}</Text>
                 <Divider my={2} />
@@ -62,7 +62,7 @@ const Index = () => {
 
           <form onSubmit={handleSubmit}>
             <HStack marginTop={4}>
-              <Input placeholder="Type your message..." value={message} onChange={(e) => setMessage(e.target.value)} />
+              <Input placeholder="Type your message..." value={message} onChange={(e) => setMessage(e.target.value)} bg="gray.800" />
               <Button colorScheme="blue" type="submit" rightIcon={<FaPaperPlane />} isLoading={loading}>
                 Send
               </Button>
