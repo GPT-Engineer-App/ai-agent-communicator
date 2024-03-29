@@ -45,7 +45,7 @@ const Index = () => {
       {!agentId && (
         <VStack spacing={4}>
           <Input placeholder="Enter your AI Agent ID" value={agentId} onChange={(e) => setAgentId(e.target.value)} bg="gray.800" />
-          <Input placeholder="Enter your OpenAI API Key" value={apiKey} onChange={(e) => setApiKey(e.target.value)} bg="gray.800" />
+          <Input type="password" placeholder="Enter your OpenAI API Key" value={apiKey} onChange={(e) => setApiKey(e.target.value)} bg="gray.800" />
           <Button colorScheme="blue" onClick={() => setAgentId(agentId)}>
             Set Agent ID
           </Button>
