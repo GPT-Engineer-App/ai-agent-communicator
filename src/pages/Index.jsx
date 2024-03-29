@@ -7,27 +7,50 @@ const Index = () => {
   const [apiKey, setApiKey] = useState("");
   const [message, setMessage] = useState("");
   const [conversation, setConversation] = useState([]);
+  const [threadId, setThreadId] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    // Make API call to OpenAI's Assistants API with the agentId and message
-    const response = await fetch("https://api.openai.com/v1/assistants", {
+    if (!threadId) {
+      const threadResponse = await fetch("https://api.openai.com/v1/assistants/threads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          assistant_id: agentId,
+        }),
+      });
+
+      const threadData = await threadResponse.json();
+      setThreadId(threadData.thread_id);
+    }
+
+    await fetch(`https://api.openai.com/v1/assistants/threads/${threadId}/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        assistant_id: agentId,
         input: message,
       }),
     });
 
-    const data = await response.json();
-    setConversation([...conversation, { user: message, agent: data.output }]);
+    const responseResponse = await fetch(`https://api.openai.com/v1/assistants/threads/${threadId}/run`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+    });
+
+    const responseData = await responseResponse.json();
+    setConversation([...conversation, { user: message, agent: responseData.output }]);
     setMessage("");
     setLoading(false);
   };
