@@ -15,7 +15,7 @@ const Index = () => {
     setLoading(true);
 
     if (!threadId) {
-      const threadResponse = await fetch("https://api.openai.com/v1/assistants/threads", {
+      const threadResponse = await fetch(`https://api.openai.com/v1/assistants/${agentId}/threads`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +31,7 @@ const Index = () => {
       setThreadId(threadData.thread_id);
     }
 
-    await fetch(`https://api.openai.com/v1/assistants/threads/${threadId}/messages`, {
+    await fetch(`https://api.openai.com/v1/assistants/${agentId}/threads/${threadId}/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const Index = () => {
       }),
     });
 
-    const responseResponse = await fetch(`https://api.openai.com/v1/assistants/threads/${threadId}/run`, {
+    const responseResponse = await fetch(`https://api.openai.com/v1/assistants/${agentId}/threads/${threadId}/run`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
